@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From LLMs to Agentic AI: Technical Deep Dive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/night.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- Title Slide -->
+            <section>
+                <h1>🤖 From LLMs to Agentic AI</h1>
+                <h3>A Technical Deep Dive</h3>
+                <p class="text-muted">Architecture, Implementation, and the Future of Digital Commerce</p>
+                <div class="nav-pills">
+                    <a href="overview.html">📋 Overview</a>
+                    <span class="active">🔧 Technical</span>
+                    <a href="business.html">🏢 Business</a>
+                </div>
+            </section>
+
+            <!-- Navigation Cards -->
+            <section>
+                <h2>📑 Presentation Series</h2>
+                <div class="nav-cards">
+                    <a href="overview.html" class="nav-card">
+                        <span class="emoji">🎯</span>
+                        <h3>Overview</h3>
+                        <p>High-level walkthrough<br>~10 minutes</p>
+                    </a>
+                    <div class="nav-card active">
+                        <span class="emoji">🔧</span>
+                        <h3>Technical</h3>
+                        <p>You are here<br>Deep dive</p>
+                    </div>
+                    <a href="business.html" class="nav-card">
+                        <span class="emoji">🏢</span>
+                        <h3>Business</h3>
+                        <p>Strategy & org impact<br>Leadership focus</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Agenda -->
+            <section>
+                <h2>🗺️ Technical Roadmap</h2>
+                <div class="agenda">
+                    <a href="#/neural-networks" class="agenda-item accent-1">1. Neural Network Fundamentals & Training</a>
+                    <a href="#/transformers" class="agenda-item accent-2">2. Transformer Architecture Deep Dive</a>
+                    <a href="#/llm-training" class="agenda-item accent-3">3. LLM Training Pipeline & Inference</a>
+                    <a href="#/agents" class="agenda-item accent-4">4. Agent Architecture & Design Patterns</a>
+                    <a href="#/mcp" class="agenda-item accent-5">5. MCP Protocol Specification</a>
+                    <a href="#/adk" class="agenda-item accent-1">6. Google ADK Framework</a>
+                    <a href="#/ecommerce" class="agenda-item accent-2">7. E-Commerce Implementation Patterns</a>
+                </div>
+            </section>
+
+            <!-- ===== SECTION 1: Neural Networks ===== -->
+            <section id="neural-networks">
+                <section class="section-title accent-1">
+                    <div class="title-box">
+                        <p class="emoji">🧠</p>
+                        <h1>Part 1: Neural Network Fundamentals</h1>
+                        <p class="subtitle">The mathematical foundation of modern AI</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>The Neuron: Mathematical Model</h2>
+                    <div class="box text-center">
+                        <p style="font-size: 1.2em; font-family: serif; font-style: italic; color: var(--color-highlight);">y = f(Σ(wᵢxᵢ) + b)</p>
+                    </div>
+                    <br>
+                    <ul>
+                        <li><code>xᵢ</code> = input values (features)</li>
+                        <li><code>wᵢ</code> = learned weights (parameters)</li>
+                        <li><code>b</code> = bias term</li>
+                        <li><code>f</code> = activation function (introduces non-linearity)</li>
+                        <li><code>y</code> = output</li>
+                    </ul>
+                    <p class="text-muted">A neuron is just a weighted sum followed by a non-linear function</p>
+                </section>
+
+                <section>
+                    <h2>Activation Functions</h2>
+                    <table>
+                        <tr><th>Function</th><th>Formula</th><th>Use Case</th></tr>
+                        <tr><td>ReLU</td><td><code>max(0, x)</code></td><td>Hidden layers (default)</td></tr>
+                        <tr><td>GELU</td><td><code>x · Φ(x)</code></td><td>Transformers (smoother)</td></tr>
+                        <tr><td>Sigmoid</td><td><code>1/(1+e⁻ˣ)</code></td><td>Binary classification</td></tr>
+                        <tr><td>Softmax</td><td><code>eˣⁱ/Σeˣʲ</code></td><td>Multi-class (LLM final layer)</td></tr>
+                        <tr><td>SwiGLU</td><td><code>Swish(xW) ⊗ xV</code></td><td>Modern LLMs (Llama)</td></tr>
+                    </table>
+                    <p class="text-muted">Non-linearity is essential — without it, stacked layers collapse to one linear transform</p>
+                </section>
+
+                <section>
+                    <h2>Loss Functions & Training</h2>
+                    <div class="two-col">
+                        <div class="box">
+                            <h4>Cross-Entropy Loss</h4>
+                            <p style="font-family: serif; color: var(--color-highlight);">L = -Σ yᵢ log(ŷᵢ)</p>
+                            <p class="text-muted">Used for LLM next-token prediction</p>
+                        </div>
+                        <div class="box">
+                            <h4>Backpropagation</h4>
+                            <p style="font-family: serif; color: var(--color-highlight);">∂L/∂wᵢ = ∂L/∂y · ∂y/∂z · ∂z/∂wᵢ</p>
+                            <p class="text-muted">Chain rule applied recursively</p>
+                        </div>
+                    </div>
+                    <br>
+                    <p><strong>Training loop:</strong> Forward pass → Compute loss → Backward pass → Update weights</p>
+                </section>
+
+                <section>
+                    <h2>Gradient Descent Optimizers</h2>
+                    <table>
+                        <tr><th>Optimizer</th><th>Key Innovation</th><th>Used In</th></tr>
+                        <tr><td>SGD</td><td>Basic gradient steps</td><td>Simple cases</td></tr>
+                        <tr><td>Adam</td><td>Adaptive learning rates + momentum</td><td>Most LLM training</td></tr>
+                        <tr><td>AdamW</td><td>Decoupled weight decay</td><td>GPT, BERT, modern LLMs</td></tr>
+                    </table>
+                    <br>
+                    <pre><code># AdamW update rule
+m = β₁ * m + (1 - β₁) * gradient          # Momentum
+v = β₂ * v + (1 - β₂) * gradient²         # Adaptive LR
+w = w - lr * (m / (√v + ε) + λ * w)       # Update + decay</code></pre>
+                </section>
+            </section>
+
+            <!-- ===== SECTION 2: Transformers ===== -->
+            <section id="transformers">
+                <section class="section-title accent-2">
+                    <div class="title-box">
+                        <p class="emoji">🔮</p>
+                        <h1>Part 2: Transformer Architecture</h1>
+                        <p class="subtitle">"Attention Is All You Need" (Vaswani et al., 2017)</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Why Transformers Replaced RNNs</h2>
+                    <div class="two-col">
+                        <div class="warning-box">
+                            <h4>RNN Problems</h4>
+                            <ul>
+                                <li>Sequential processing (slow)</li>
+                                <li>Vanishing gradients</li>
+                                <li>Limited long-range memory</li>
+                                <li>Can't parallelize</li>
+                            </ul>
+                        </div>
+                        <div class="success-box">
+                            <h4>Transformer Solutions</h4>
+                            <ul>
+                                <li>Parallel processing (fast)</li>
+                                <li>Direct connections to all positions</li>
+                                <li>Unlimited range (within context)</li>
+                                <li>Fully parallelizable</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="text-highlight">Training speedup: 10-100× over equivalent RNNs</p>
+                </section>
+
+                <section>
+                    <h2>Self-Attention: The Core Mechanism</h2>
+                    <div class="box text-center">
+                        <p style="font-size: 1.1em; font-family: serif; color: var(--color-highlight);">Attention(Q, K, V) = softmax(QKᵀ / √dₖ) · V</p>
+                    </div>
+                    <br>
+                    <ul>
+                        <li><code>Q</code> (Query): "What am I looking for?"</li>
+                        <li><code>K</code> (Key): "What do I contain?"</li>
+                        <li><code>V</code> (Value): "What information do I provide?"</li>
+                        <li><code>√dₖ</code>: Scaling factor to prevent exploding softmax</li>
+                    </ul>
+                    <p class="text-muted">Each token attends to ALL other tokens with learned importance weights</p>
+                </section>
+
+                <section>
+                    <h2>Self-Attention Implementation</h2>
+                    <pre><code class="python">def self_attention(X, W_q, W_k, W_v):
+    # X shape: (seq_len, d_model)
+    
+    # 1. Project inputs to Q, K, V
+    Q = X @ W_q  # (seq_len, d_k)
+    K = X @ W_k  # (seq_len, d_k)
+    V = X @ W_v  # (seq_len, d_v)
+    
+    # 2. Compute attention scores
+    scores = Q @ K.T / sqrt(d_k)  # (seq_len, seq_len)
+    
+    # 3. Apply causal mask (for decoder/LLMs)
+    scores = scores.masked_fill(causal_mask, -inf)
+    
+    # 4. Softmax to get attention weights
+    attention_weights = softmax(scores, dim=-1)
+    
+    # 5. Weighted sum of values
+    output = attention_weights @ V  # (seq_len, d_v)
+    
+    return output, attention_weights</code></pre>
+                </section>
+
+                <section>
+                    <h2>Multi-Head Attention</h2>
+                    <div class="box">
+                        <p>Run <span class="text-highlight">multiple attention operations in parallel</span></p>
+                        <p>Each "head" learns different relationship patterns</p>
+                    </div>
+                    <br>
+                    <div class="grid-3">
+                        <div class="grid-item">
+                            <h4>Positional</h4>
+                            <p>Previous/next token</p>
+                        </div>
+                        <div class="grid-item">
+                            <h4>Syntactic</h4>
+                            <p>Subject-verb links</p>
+                        </div>
+                        <div class="grid-item">
+                            <h4>Semantic</h4>
+                            <p>Coreference, entities</p>
+                        </div>
+                    </div>
+                    <br>
+                    <p class="text-muted">GPT-3: 96 heads × 128 dims = 12,288 d_model</p>
+                </section>
+
+                <section>
+                    <h2>Key Architecture Numbers</h2>
+                    <table>
+                        <tr><th>Model</th><th>Params</th><th>Layers</th><th>d_model</th><th>Heads</th><th>Context</th></tr>
+                        <tr><td>GPT-2</td><td>1.5B</td><td>48</td><td>1600</td><td>25</td><td>1024</td></tr>
+                        <tr><td>GPT-3</td><td>175B</td><td>96</td><td>12288</td><td>96</td><td>2048</td></tr>
+                        <tr><td>GPT-4</td><td>~1.7T*</td><td>~120*</td><td>?</td><td>?</td><td>128K</td></tr>
+                        <tr><td>Claude 3</td><td>?</td><td>?</td><td>?</td><td>?</td><td>200K</td></tr>
+                        <tr><td>Llama 3</td><td>70B</td><td>80</td><td>8192</td><td>64</td><td>8K</td></tr>
+                    </table>
+                    <p class="text-subtle">* Estimated, GPT-4 possibly MoE (Mixture of Experts)</p>
+                </section>
+            </section>
+
+            <!-- ===== SECTION 3: LLM Training ===== -->
+            <section id="llm-training">
+                <section class="section-title accent-3">
+                    <div class="title-box">
+                        <p class="emoji">📚</p>
+                        <h1>Part 3: LLM Training Pipeline</h1>
+                        <p class="subtitle">From raw text to instruction-following AI</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>The Three Training Stages</h2>
+                    <div class="agenda">
+                        <div class="agenda-item accent-1"><strong>Stage 1: Pre-training</strong> — Next-token prediction on massive corpus</div>
+                        <div class="agenda-item accent-2"><strong>Stage 2: Supervised Fine-tuning (SFT)</strong> — Learn to follow instructions</div>
+                        <div class="agenda-item accent-3"><strong>Stage 3: RLHF / DPO</strong> — Align with human preferences</div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Tokenization: Text → Numbers</h2>
+                    <pre><code class="python"># BPE (Byte-Pair Encoding) - Used by GPT models
+from tiktoken import get_encoding
+enc = get_encoding("cl100k_base")  # GPT-4 tokenizer
+
+text = "Hello, how are you?"
+tokens = enc.encode(text)
+# [9906, 11, 1268, 527, 499, 30]
+
+# Common patterns become single tokens:
+# "the" → single token
+# " the" → different single token (with space)
+# "unhappiness" → ["un", "happiness"]
+
+# Vocabulary size typically 50k-100k tokens</code></pre>
+                    <p class="text-muted">Subword tokenization balances vocabulary size vs sequence length</p>
+                </section>
+
+                <section>
+                    <h2>Pre-training Data Pipeline</h2>
+                    <pre><code>Raw Web Crawl (petabytes)
+    ↓
+┌─────────────────────────────────────┐
+│ Quality Filtering                    │
+│ - Language detection                 │
+│ - Perplexity filtering              │
+│ - Deduplication (exact & fuzzy)     │
+│ - PII removal, Safety filtering     │
+└─────────────────────────────────────┘
+    ↓
+Clean Corpus (1-15T tokens)
+    ↓
+Data Mixing: Web 60%, Code 15%, Books 10%,
+             Wikipedia 5%, Scientific 5%, Curated 5%</code></pre>
+                </section>
+
+                <section>
+                    <h2>DPO: Simpler Alternative to RLHF</h2>
+                    <div class="box">
+                        <p><strong>Direct Preference Optimization</strong> — no reward model needed</p>
+                    </div>
+                    <pre><code class="python"># DPO Loss (Rafailov et al., 2023)
+def dpo_loss(policy, reference, chosen, rejected, beta=0.1):
+    # Log probs under policy and reference
+    pi_chosen = policy.log_prob(chosen)
+    pi_rejected = policy.log_prob(rejected)
+    ref_chosen = reference.log_prob(chosen)
+    ref_rejected = reference.log_prob(rejected)
+    
+    # Implicit reward difference
+    logits = beta * ((pi_chosen - ref_chosen) - 
+                     (pi_rejected - ref_rejected))
+    
+    return -F.logsigmoid(logits).mean()</code></pre>
+                    <p class="text-accent">Simpler, more stable, increasingly preferred over PPO</p>
+                </section>
+
+                <section>
+                    <h2>Decoding Strategies</h2>
+                    <table>
+                        <tr><th>Strategy</th><th>Description</th><th>Use Case</th></tr>
+                        <tr><td>Greedy</td><td>Always pick highest prob</td><td>Deterministic</td></tr>
+                        <tr><td>Temperature</td><td>Scale logits before softmax</td><td>Control randomness</td></tr>
+                        <tr><td>Top-k</td><td>Sample from top k tokens</td><td>Limit wild outputs</td></tr>
+                        <tr><td>Top-p (nucleus)</td><td>Sample from smallest set ≥ p</td><td>Adaptive diversity</td></tr>
+                        <tr><td>Beam Search</td><td>Track top n sequences</td><td>Translation</td></tr>
+                    </table>
+                </section>
+            </section>
+
+            <!-- ===== SECTION 4: Agents ===== -->
+            <section id="agents">
+                <section class="section-title accent-4">
+                    <div class="title-box">
+                        <p class="emoji">🤖</p>
+                        <h1>Part 4: Agent Architecture</h1>
+                        <p class="subtitle">Turning LLMs into autonomous actors</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>What Makes an Agent?</h2>
+                    <div class="box text-center">
+                        <p><strong>LLM:</strong> Text in → Text out</p>
+                        <p><strong>Agent:</strong> Goal in → Actions + Results out</p>
+                    </div>
+                    <br>
+                    <div class="flow">
+                        <div class="flow-box">LLM Core</div>
+                        <span class="flow-arrow">+</span>
+                        <div class="flow-box">Tools</div>
+                        <span class="flow-arrow">+</span>
+                        <div class="flow-box">Memory</div>
+                        <span class="flow-arrow">+</span>
+                        <div class="flow-box">Orchestration</div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>The ReAct Pattern</h2>
+                    <pre><code>User: What's the weather in Austin and should I bring an umbrella?
+
+Thought: I need to check the weather in Austin to answer this.
+Action: weather_lookup(location="Austin, TX")
+Observation: {"temp": 72, "conditions": "Partly cloudy", "rain_chance": 15%}
+
+Thought: Low rain chance (15%), probably don't need umbrella.
+Action: respond(message="It's 72°F and partly cloudy in Austin 
+        with only a 15% chance of rain. You likely don't need 
+        an umbrella.")
+
+Final Answer: It's 72°F and partly cloudy...</code></pre>
+                    <p class="text-muted">ReAct (Yao et al., 2022) — Most common agent pattern</p>
+                </section>
+
+                <section>
+                    <h2>Function Calling</h2>
+                    <pre><code class="python"># Define tools as JSON Schema
+tools = [{
+    "type": "function",
+    "function": {
+        "name": "search_products",
+        "description": "Search HEB product catalog",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string"},
+                "category": {"type": "string", 
+                            "enum": ["produce", "meat", "dairy"]}
+            },
+            "required": ["query"]
+        }
+    }
+}]
+
+# Model responds with structured function call
+response = {"tool_calls": [{
+    "function": {
+        "name": "search_products",
+        "arguments": '{"query": "organic milk", "category": "dairy"}'
+    }
+}]}</code></pre>
+                </section>
+
+                <section>
+                    <h2>Agent Loop Implementation</h2>
+                    <pre><code class="python">class Agent:
+    def __init__(self, llm, tools, system_prompt):
+        self.llm = llm
+        self.tools = {t.name: t for t in tools}
+        self.system_prompt = system_prompt
+    
+    def run(self, user_message, max_iterations=10):
+        messages = [
+            {"role": "system", "content": self.system_prompt},
+            {"role": "user", "content": user_message}
+        ]
+        
+        for _ in range(max_iterations):
+            response = self.llm.chat(messages, tools=self.tools)
+            
+            if response.tool_calls:
+                for call in response.tool_calls:
+                    result = self.tools[call.name].execute(**call.args)
+                    messages.append({"role": "tool", "content": result})
+            else:
+                return response.content  # Final response
+        
+        raise MaxIterationsExceeded()</code></pre>
+                </section>
+
+                <section>
+                    <h2>Memory Architecture</h2>
+                    <div class="two-col">
+                        <div class="box">
+                            <h4>Short-term (Context)</h4>
+                            <ul>
+                                <li>Current conversation</li>
+                                <li>Recent tool results</li>
+                                <li>Limited by tokens</li>
+                            </ul>
+                            <p class="text-muted">Sliding window, summarization</p>
+                        </div>
+                        <div class="box">
+                            <h4>Long-term (External)</h4>
+                            <ul>
+                                <li>User preferences</li>
+                                <li>Past interactions</li>
+                                <li>Knowledge base</li>
+                            </ul>
+                            <p class="text-muted">Vector DB, RAG retrieval</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Multi-Agent Architectures</h2>
+                    <pre><code>┌─────────────────────────────────────────────────────┐
+│                    ORCHESTRATOR                      │
+│         (Routes tasks, manages state)                │
+└──────────────────────┬──────────────────────────────┘
+                       │
+        ┌──────────────┼──────────────┐
+        ▼              ▼              ▼
+┌────────────┐  ┌────────────┐  ┌────────────┐
+│  PLANNER   │  │  EXECUTOR  │  │   CRITIC   │
+│            │  │            │  │            │
+│ Break down │→ │ Run tools, │→ │ Validate   │
+│ tasks      │  │ API calls  │  │ output     │
+└────────────┘  └────────────┘  └────────────┘</code></pre>
+                </section>
+            </section>
+
+            <!-- ===== SECTION 5: MCP ===== -->
+            <section id="mcp">
+                <section class="section-title accent-5">
+                    <div class="title-box">
+                        <p class="emoji">🔌</p>
+                        <h1>Part 5: Model Context Protocol</h1>
+                        <p class="subtitle">The universal standard for AI tool integration</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>The Problem MCP Solves</h2>
+                    <div class="two-col">
+                        <div class="warning-box">
+                            <h4>Before MCP:</h4>
+                            <ul>
+                                <li>OpenAI function format</li>
+                                <li>Anthropic tool format</li>
+                                <li>LangChain tools</li>
+                                <li>Custom implementations</li>
+                            </ul>
+                            <p>Tools locked to frameworks</p>
+                        </div>
+                        <div class="success-box">
+                            <h4>With MCP:</h4>
+                            <ul>
+                                <li>Universal protocol</li>
+                                <li>Any tool + any client</li>
+                                <li>Standardized discovery</li>
+                                <li>Plug and play</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>MCP Architecture</h2>
+                    <pre><code>┌─────────────────┐         ┌─────────────────┐
+│   MCP Client    │◄───────►│   MCP Server    │
+│                 │  JSON-  │                 │
+│  (Claude,       │   RPC   │  (Tool          │
+│   OpenClaw,     │   over  │   Provider)     │
+│   Your App)     │  stdio  │                 │
+└─────────────────┘         └─────────────────┘
+         │                           │
+         ▼                           ▼
+┌─────────────────┐         ┌─────────────────┐
+│   LLM Backend   │         │   External      │
+│                 │         │   Systems       │
+└─────────────────┘         └─────────────────┘</code></pre>
+                </section>
+
+                <section>
+                    <h2>MCP Server Capabilities</h2>
+                    <div class="grid-3">
+                        <div class="box">
+                            <h4>🔧 Tools</h4>
+                            <p>Functions model can call</p>
+                            <pre><code>search_products()
+add_to_cart()
+checkout()</code></pre>
+                        </div>
+                        <div class="box">
+                            <h4>📚 Resources</h4>
+                            <p>Data model can read</p>
+                            <pre><code>file://inventory
+db://products
+api://user/profile</code></pre>
+                        </div>
+                        <div class="box">
+                            <h4>💬 Prompts</h4>
+                            <p>Pre-built templates</p>
+                            <pre><code>shopping_assistant
+product_compare
+order_summary</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Building an MCP Server</h2>
+                    <pre><code class="python">from mcp.server import Server
+from mcp.types import Tool, TextContent
+
+server = Server("heb-shopping")
+
+@server.tool()
+async def search_products(query: str, category: str = None):
+    """Search HEB product catalog."""
+    results = await heb_api.search(query, category=category)
+    return [TextContent(type="text", text=json.dumps(results))]
+
+@server.tool()
+async def add_to_cart(product_id: str, quantity: int = 1):
+    """Add a product to the shopping cart."""
+    result = await heb_api.cart.add(product_id, quantity)
+    return [TextContent(type="text", 
+                        text=f"Added {quantity}x. Total: ${result.total}")]
+
+if __name__ == "__main__":
+    server.run()  # Listens on stdio</code></pre>
+                </section>
+            </section>
+
+            <!-- ===== SECTION 6: Google ADK ===== -->
+            <section id="adk">
+                <section class="section-title accent-1">
+                    <div class="title-box">
+                        <p class="emoji">🏗️</p>
+                        <h1>Part 6: Google Agent Development Kit</h1>
+                        <p class="subtitle">Enterprise-grade agent framework</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>ADK Architecture</h2>
+                    <pre><code>┌────────────────────────────────────────────────────┐
+│                 APPLICATION LAYER                   │
+│            (Your Agent Implementation)              │
+└────────────────────────┬───────────────────────────┘
+                         │
+┌────────────────────────▼───────────────────────────┐
+│                  ADK FRAMEWORK                      │
+│  ┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐   │
+│  │ Agent  │  │ Tools  │  │ Memory │  │ Safety │   │
+│  │ Runner │  │ Manager│  │ Store  │  │Filters │   │
+│  └────────┘  └────────┘  └────────┘  └────────┘   │
+└────────────────────────┬───────────────────────────┘
+                         │
+┌────────────────────────▼───────────────────────────┐
+│               GEMINI API / VERTEX AI                │
+└────────────────────────────────────────────────────┘</code></pre>
+                </section>
+
+                <section>
+                    <h2>Defining an ADK Agent</h2>
+                    <pre><code class="python">from google.adk import Agent, Tool
+
+@Tool
+def search_heb_products(query: str, max_results: int = 10) -> dict:
+    """Search HEB product catalog."""
+    return heb_api.search(query, limit=max_results)
+
+shopping_agent = Agent(
+    name="heb_shopping_assistant",
+    model="gemini-2.0-flash",
+    system_instruction="""You are an HEB shopping assistant. 
+    Help customers find products, build shopping lists, and
+    provide meal planning suggestions.""",
+    tools=[
+        search_heb_products,
+        add_to_cart,
+        get_cart_total,
+    ],
+)</code></pre>
+                </section>
+
+                <section>
+                    <h2>ADK vs Other Frameworks</h2>
+                    <table>
+                        <tr><th>Feature</th><th>ADK</th><th>LangChain</th><th>OpenClaw</th></tr>
+                        <tr><td>Primary Model</td><td>Gemini</td><td>Any</td><td>Any</td></tr>
+                        <tr><td>Hosting</td><td>Google Cloud</td><td>Self-hosted</td><td>Self-hosted</td></tr>
+                        <tr><td>MCP Support</td><td>Yes</td><td>Via integration</td><td>Yes</td></tr>
+                        <tr><td>Enterprise Auth</td><td>Native IAM</td><td>Custom</td><td>Custom</td></tr>
+                        <tr><td>Best For</td><td>Enterprise</td><td>Flexibility</td><td>Personal AI</td></tr>
+                    </table>
+                </section>
+            </section>
+
+            <!-- ===== SECTION 7: E-commerce ===== -->
+            <section id="ecommerce">
+                <section class="section-title accent-2">
+                    <div class="title-box">
+                        <p class="emoji">🛒</p>
+                        <h1>Part 7: E-Commerce Implementation</h1>
+                        <p class="subtitle">Building AI-native shopping experiences</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Agent-Ready API Design</h2>
+                    <pre><code class="python"># Traditional REST API
+GET /products?search=milk&category=dairy&limit=10
+
+# Agent-optimized API
+POST /agent/product-search
+{
+    "query": "organic whole milk for family of 4 for 1 week",
+    "context": {
+        "dietary_restrictions": ["lactose-free"],
+        "budget_preference": "value",
+        "brand_preferences": ["HEB", "Horizon"]
+    },
+    "response_format": {
+        "include_alternatives": true,
+        "explain_recommendations": true
+    }
+}</code></pre>
+                    <p class="text-accent">APIs should accept natural language context, not just keywords</p>
+                </section>
+
+                <section>
+                    <h2>Customer Knowledge Graph</h2>
+                    <pre><code>                ┌─────────────┐
+                │   CUSTOMER  │
+                │   (Amy)     │
+                └──────┬──────┘
+                       │
+     ┌─────────────────┼─────────────────┐
+     ▼                 ▼                 ▼
+┌────────────┐  ┌────────────┐  ┌────────────┐
+│PREFERENCES │  │ HOUSEHOLD  │  │  HISTORY   │
+├────────────┤  ├────────────┤  ├────────────┤
+│ organic    │  │ size: 4    │  │ orders:156 │
+│ low_sodium │  │ has_kids   │  │ avg: $127  │
+│ HEB_brand  │  │ 2_dogs     │  │ freq:weekly│
+└────────────┘  └────────────┘  └────────────┘</code></pre>
+                    <p class="text-muted">Graph enables: "Get what we need for the kids' lunches"</p>
+                </section>
+
+                <section>
+                    <h2>Agent-to-Agent Commerce</h2>
+                    <pre><code>┌─────────────────┐                ┌─────────────────┐
+│  Customer's     │                │  HEB's          │
+│  Personal Agent │                │  Shopping Agent │
+└────────┬────────┘                └────────┬────────┘
+         │                                  │
+         │  "Need groceries for week,       │
+         │   budget $150, prefer pickup"    │
+         │─────────────────────────────────►│
+         │                                  │
+         │  "Here's optimized cart based    │
+         │   on history + current sales..." │
+         │◄─────────────────────────────────│
+         │                                  │
+         │  "Substitute almond milk for     │
+         │   regular (household preference)"│
+         │─────────────────────────────────►│
+
+Both agents speak MCP. Human just said "get groceries."</code></pre>
+                </section>
+
+                <section>
+                    <h2>Implementation Roadmap</h2>
+                    <div class="agenda">
+                        <div class="agenda-item accent-1"><strong>Phase 1:</strong> MCP-enabled product APIs, basic search agent</div>
+                        <div class="agenda-item accent-2"><strong>Phase 2:</strong> Customer knowledge graph, preference learning</div>
+                        <div class="agenda-item accent-3"><strong>Phase 3:</strong> Natural language shopping, multi-turn context</div>
+                        <div class="agenda-item accent-4"><strong>Phase 4:</strong> Proactive suggestions, auto-replenishment</div>
+                        <div class="agenda-item accent-5"><strong>Phase 5:</strong> Third-party agent integration, A2A commerce</div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- ===== Closing ===== -->
+            <section id="summary">
+                <section>
+                    <h2>The Complete Stack</h2>
+                    <pre><code>┌─────────────────────────────────────────────────────┐
+│  APPLICATIONS                                        │
+│  Conversational Commerce, Predictive Shopping        │
+├─────────────────────────────────────────────────────┤
+│  AGENT FRAMEWORKS                                    │
+│  Google ADK, OpenClaw, LangChain                    │
+├─────────────────────────────────────────────────────┤
+│  TOOL PROTOCOL: MCP                                 │
+├─────────────────────────────────────────────────────┤
+│  LARGE LANGUAGE MODELS                              │
+│  GPT-4, Claude, Gemini, Llama                       │
+├─────────────────────────────────────────────────────┤
+│  TRANSFORMER ARCHITECTURE                           │
+├─────────────────────────────────────────────────────┤
+│  DEEP LEARNING FUNDAMENTALS                         │
+└─────────────────────────────────────────────────────┘</code></pre>
+                </section>
+
+                <section>
+                    <h2>Key Technical Takeaways</h2>
+                    <ul>
+                        <li><span class="text-highlight">Transformers</span> enabled modern AI via parallel attention</li>
+                        <li><span class="text-highlight">LLMs</span> are next-token predictors with emergent reasoning</li>
+                        <li><span class="text-highlight">Agents</span> = LLM + Tools + Memory + Orchestration</li>
+                        <li><span class="text-highlight">MCP</span> standardizes tool integration across models</li>
+                        <li><span class="text-highlight">E-commerce</span> must evolve APIs for agent consumption</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p class="emoji-lg">🦞</p>
+                    <h2>Questions & Discussion</h2>
+                    <br>
+                    <p class="text-muted">High-level overview: <code>overview.html</code></p>
+                    <p class="text-muted">Business strategy: <code>business.html</code></p>
+                    <br>
+                    <p class="text-accent">The future is already here — it's just not evenly distributed yet.</p>
+                </section>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',
+            backgroundTransition: 'fade',
+            width: 1200,
+            height: 700,
+            margin: 0.1,
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI to Agentic Commerce: The Big Picture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/night.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- Title Slide -->
+            <section>
+                <h1>🤖 AI to Agentic Commerce</h1>
+                <h3>The Big Picture</h3>
+                <p class="text-muted">A high-level journey from neural networks to autonomous shopping</p>
+                <div class="nav-pills">
+                    <span class="active">📋 Overview</span>
+                    <a href="index.html">🔧 Technical</a>
+                    <a href="business.html">🏢 Business</a>
+                </div>
+            </section>
+
+            <!-- Journey Overview -->
+            <section>
+                <h2>The Journey We'll Take</h2>
+                <div class="agenda">
+                    <div class="agenda-item accent-1">🧠 Neural Networks — How machines learn</div>
+                    <div class="agenda-item accent-2">🔮 Transformers — The attention breakthrough</div>
+                    <div class="agenda-item accent-3">📚 LLMs — Language models at scale</div>
+                    <div class="agenda-item accent-4">🤖 Agents — From chat to action</div>
+                    <div class="agenda-item accent-5">🛒 Commerce — The business transformation</div>
+                </div>
+            </section>
+
+            <!-- ===== SECTION 1: Neural Networks ===== -->
+            <section>
+                <section class="section-title accent-1">
+                    <div class="title-box">
+                        <p class="emoji">🧠</p>
+                        <h1>Neural Networks</h1>
+                        <p class="subtitle">How machines learn from examples</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>The Core Idea</h2>
+                    <div class="box text-center">
+                        <p class="emoji-md">📊 → 🧮 → 🎯</p>
+                        <p>Data in → Math → Prediction out</p>
+                    </div>
+                    <br>
+                    <p>A neural network is a <span class="text-highlight">function approximator</span></p>
+                    <p>It learns patterns by adjusting millions of numbers (weights)</p>
+                </section>
+
+                <section>
+                    <h2>Learning = Adjusting Weights</h2>
+                    <div class="flow">
+                        <div class="flow-box">Make prediction</div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box">Measure error</div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box">Adjust weights</div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-box">Repeat</div>
+                    </div>
+                    <br>
+                    <p class="text-accent">This loop runs billions of times during training</p>
+                    <p class="text-muted">The math that makes it work: backpropagation + gradient descent</p>
+                </section>
+
+                <section>
+                    <h2>Key Insight</h2>
+                    <div class="quote">
+                        "Deep" networks learn hierarchical representations —<br>
+                        simple patterns combine into complex concepts
+                    </div>
+                    <br>
+                    <p>Layer 1: Edges → Layer 2: Shapes → Layer 3: Objects → Layer N: Concepts</p>
+                </section>
+            </section>
+
+            <!-- ===== SECTION 2: Transformers ===== -->
+            <section>
+                <section class="section-title accent-2">
+                    <div class="title-box">
+                        <p class="emoji">🔮</p>
+                        <h1>Transformers</h1>
+                        <p class="subtitle">The architecture that changed everything</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>The Breakthrough: Attention</h2>
+                    <div class="box">
+                        <p>Old approach (RNNs): Process words <span class="text-highlight">one at a time</span>, sequentially</p>
+                        <p>↓</p>
+                        <p>New approach (Transformers): Look at <span class="text-accent">all words at once</span>, in parallel</p>
+                    </div>
+                    <br>
+                    <p class="text-muted">"Attention Is All You Need" — Google, 2017</p>
+                </section>
+
+                <section>
+                    <h2>Self-Attention in Plain English</h2>
+                    <p>For each word, ask: <span class="text-highlight">"Which other words matter for understanding me?"</span></p>
+                    <br>
+                    <div class="box">
+                        <p>"The <span class="text-accent">cat</span> sat on the mat because <span class="text-highlight">it</span> was tired"</p>
+                        <br>
+                        <p>The word "it" attends strongly to "cat" — that's what "it" refers to</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Why Transformers Won</h2>
+                    <div class="grid-3">
+                        <div class="grid-item">
+                            <p class="emoji-md">⚡</p>
+                            <h3>Parallel</h3>
+                            <p>Train 100x faster on GPUs</p>
+                        </div>
+                        <div class="grid-item">
+                            <p class="emoji-md">🔗</p>
+                            <h3>Long-Range</h3>
+                            <p>Connect distant words easily</p>
+                        </div>
+                        <div class="grid-item">
+                            <p class="emoji-md">📈</p>
+                            <h3>Scalable</h3>
+                            <p>More data + compute = better</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- ===== SECTION 3: LLMs ===== -->
+            <section>
+                <section class="section-title accent-3">
+                    <div class="title-box">
+                        <p class="emoji">📚</p>
+                        <h1>Large Language Models</h1>
+                        <p class="subtitle">Transformers trained on the internet</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>The Simple Training Objective</h2>
+                    <div class="box text-center">
+                        <p style="font-size: 1.4em;"><span class="text-highlight">Predict the next word</span></p>
+                        <br>
+                        <p>"The capital of France is ___"</p>
+                        <p class="text-accent">→ "Paris"</p>
+                    </div>
+                    <br>
+                    <p>Do this trillions of times across all of human text</p>
+                    <p class="text-muted">The model learns grammar, facts, reasoning, and more — all emerge from this simple objective</p>
+                </section>
+
+                <section>
+                    <h2>The Three Training Stages</h2>
+                    <div class="agenda">
+                        <div class="agenda-item accent-1"><strong>1. Pre-training</strong> — Learn language from massive text corpus</div>
+                        <div class="agenda-item accent-2"><strong>2. Fine-tuning</strong> — Learn to follow instructions from examples</div>
+                        <div class="agenda-item accent-3"><strong>3. Alignment</strong> — Learn human preferences (helpful, harmless)</div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Scale Matters</h2>
+                    <div class="grid-4">
+                        <div class="stat-box">
+                            <div class="stat-number">GPT-2</div>
+                            <div class="stat-label">1.5B params<br>2019</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">GPT-3</div>
+                            <div class="stat-label">175B params<br>2020</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">GPT-4</div>
+                            <div class="stat-label">~1T+ params<br>2023</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">Now</div>
+                            <div class="stat-label">Claude, Gemini<br>2024-25</div>
+                        </div>
+                    </div>
+                    <br>
+                    <p class="text-accent">Emergent abilities appear at scale: reasoning, code, analysis</p>
+                </section>
+            </section>
+
+            <!-- ===== SECTION 4: Agents ===== -->
+            <section>
+                <section class="section-title accent-4">
+                    <div class="title-box">
+                        <p class="emoji">🤖</p>
+                        <h1>AI Agents</h1>
+                        <p class="subtitle">From conversation to action</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>LLM vs Agent</h2>
+                    <div class="two-col">
+                        <div class="box text-center">
+                            <h3>LLM</h3>
+                            <p class="emoji-md">💬</p>
+                            <p>Text in → Text out</p>
+                            <p class="text-muted">Can only talk</p>
+                        </div>
+                        <div class="box text-center">
+                            <h3>Agent</h3>
+                            <p class="emoji-md">🦾</p>
+                            <p>Goal in → Actions + Results</p>
+                            <p class="text-muted">Can do things</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>What Makes an Agent</h2>
+                    <div class="flow">
+                        <div class="flow-box">🧠 LLM<br><span class="text-muted">Reasoning</span></div>
+                        <span class="flow-arrow">+</span>
+                        <div class="flow-box">🔧 Tools<br><span class="text-muted">Actions</span></div>
+                        <span class="flow-arrow">+</span>
+                        <div class="flow-box">💾 Memory<br><span class="text-muted">Context</span></div>
+                        <span class="flow-arrow">+</span>
+                        <div class="flow-box">🔄 Loop<br><span class="text-muted">Orchestration</span></div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>The Agent Loop</h2>
+                    <div class="box">
+                        <p><strong>Think:</strong> "I need to find milk options"</p>
+                        <p>↓</p>
+                        <p><strong>Act:</strong> Call <code>search_products("milk")</code></p>
+                        <p>↓</p>
+                        <p><strong>Observe:</strong> Get results back</p>
+                        <p>↓</p>
+                        <p><strong>Think:</strong> "User prefers organic, let me filter..."</p>
+                        <p>↓</p>
+                        <p><em>Repeat until task complete</em></p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Tools = Superpowers</h2>
+                    <div class="grid-3">
+                        <div class="grid-item">
+                            <p class="emoji-md">🔍</p>
+                            <p>Search APIs</p>
+                        </div>
+                        <div class="grid-item">
+                            <p class="emoji-md">🗄️</p>
+                            <p>Databases</p>
+                        </div>
+                        <div class="grid-item">
+                            <p class="emoji-md">🌐</p>
+                            <p>Web Browsing</p>
+                        </div>
+                        <div class="grid-item">
+                            <p class="emoji-md">📧</p>
+                            <p>Email/Messages</p>
+                        </div>
+                        <div class="grid-item">
+                            <p class="emoji-md">🛒</p>
+                            <p>E-commerce</p>
+                        </div>
+                        <div class="grid-item">
+                            <p class="emoji-md">📅</p>
+                            <p>Calendars</p>
+                        </div>
+                    </div>
+                    <p class="text-accent">The LLM decides which tools to use and when</p>
+                </section>
+
+                <section>
+                    <h2>MCP: The Universal Connector</h2>
+                    <div class="box">
+                        <p><strong>Model Context Protocol</strong></p>
+                        <p>A standard way for agents to connect to any tool</p>
+                    </div>
+                    <br>
+                    <div class="flow">
+                        <div class="flow-box">Any Agent</div>
+                        <span class="flow-arrow">↔</span>
+                        <div class="flow-box" style="background: linear-gradient(135deg, #00d9ff, #6bcb77);">MCP</div>
+                        <span class="flow-arrow">↔</span>
+                        <div class="flow-box">Any Tool</div>
+                    </div>
+                    <br>
+                    <p class="text-muted">Like USB, but for AI tools — plug and play</p>
+                </section>
+            </section>
+
+            <!-- ===== SECTION 5: Commerce ===== -->
+            <section>
+                <section class="section-title accent-5">
+                    <div class="title-box">
+                        <p class="emoji">🛒</p>
+                        <h1>Agentic Commerce</h1>
+                        <p class="subtitle">The transformation of digital shopping</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Shopping Today vs Tomorrow</h2>
+                    <div class="two-col">
+                        <div class="box">
+                            <h3>Today</h3>
+                            <p>Search → Browse → Filter → Compare → Add → Checkout</p>
+                            <p class="text-muted">15-30 minutes, lots of clicks</p>
+                        </div>
+                        <div class="box">
+                            <h3>Tomorrow</h3>
+                            <p>"Get what we need for dinner this week"</p>
+                            <p class="text-accent">2 minutes, done</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>What Changes</h2>
+                    <div class="agenda">
+                        <div class="agenda-item accent-1"><strong>Natural Language Interface</strong> — Talk like you would to a helpful person</div>
+                        <div class="agenda-item accent-2"><strong>Personalization at Scale</strong> — Knows your preferences, dietary needs, budget</div>
+                        <div class="agenda-item accent-3"><strong>Proactive Assistance</strong> — "You usually buy milk on Tuesdays — running low?"</div>
+                        <div class="agenda-item accent-4"><strong>Multi-Step Task Completion</strong> — Handle entire workflows, not single searches</div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Real Example: Claw + HEB</h2>
+                    <div class="box">
+                        <p><strong>Dallas:</strong> "Plan dinners for the week, two people, ~$100"</p>
+                        <br>
+                        <p><strong>Claw:</strong></p>
+                        <ul>
+                            <li>Created 7-day meal plan</li>
+                            <li>Found sale items (NY strips 2-for-$21)</li>
+                            <li>Added 19 items to cart</li>
+                            <li>Total: $96.72</li>
+                        </ul>
+                        <br>
+                        <p class="text-muted">Using browser automation on HEB.com — this actually happened</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>The Opportunity</h2>
+                    <div class="quote">
+                        Retailers who build agent-friendly systems will own the customer relationship.
+                        <br><br>
+                        Those who don't become backends for those who do.
+                    </div>
+                </section>
+            </section>
+
+            <!-- ===== Closing ===== -->
+            <section>
+                <section>
+                    <h2>The Complete Picture</h2>
+                    <div class="agenda">
+                        <div class="agenda-item accent-5">🛒 Agentic Commerce</div>
+                        <div class="agenda-item accent-4">🤖 AI Agents (Tools + Memory + Loop)</div>
+                        <div class="agenda-item accent-3">📚 Large Language Models</div>
+                        <div class="agenda-item accent-2">🔮 Transformer Architecture</div>
+                        <div class="agenda-item accent-1">🧠 Neural Networks</div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Key Takeaways</h2>
+                    <ul>
+                        <li><span class="text-highlight">Neural networks</span> learn patterns from data</li>
+                        <li><span class="text-highlight">Transformers</span> enabled parallel processing of language</li>
+                        <li><span class="text-highlight">LLMs</span> learn to predict text, reasoning emerges</li>
+                        <li><span class="text-highlight">Agents</span> combine LLMs with tools to take action</li>
+                        <li><span class="text-highlight">Commerce</span> shifts from search to conversation</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>The Future is Already Here</h2>
+                    <div class="box text-center">
+                        <p style="font-size: 1.3em;">In 2-3 years, customers will expect:</p>
+                        <br>
+                        <p class="text-accent" style="font-size: 1.5em;">"Handle my groceries"</p>
+                        <br>
+                        <p>...and it just works.</p>
+                    </div>
+                </section>
+
+                <section>
+                    <p class="emoji-lg">🦞</p>
+                    <h2>Questions?</h2>
+                    <br>
+                    <p class="text-muted">Deep dive available in <code>index.html</code></p>
+                    <p class="text-muted">Business strategy: <code>business.html</code></p>
+                </section>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',
+            backgroundTransition: 'fade',
+            width: 1200,
+            height: 700,
+            margin: 0.1,
+        });
+    </script>
+</body>
+</html>
