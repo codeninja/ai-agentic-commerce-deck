@@ -20,7 +20,11 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%);
+            background: #0a0a12;
+            background-image: 
+                radial-gradient(ellipse at top, rgba(30,40,80,0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(0,80,80,0.2) 0%, transparent 50%),
+                linear-gradient(180deg, #0a0a1a 0%, #12121f 50%, #0d1520 100%);
             color: #eee;
             min-height: 100vh;
             line-height: 1.6;
@@ -67,8 +71,8 @@
         }
         
         .deck-card {
-            background: rgba(40,40,60,0.6);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: linear-gradient(135deg, rgba(25,30,50,0.95) 0%, rgba(35,40,65,0.9) 100%);
+            border: 1px solid rgba(100,120,180,0.25);
             border-radius: 16px;
             padding: 28px;
             text-decoration: none;
@@ -78,12 +82,14 @@
             grid-template-columns: auto 1fr auto;
             align-items: center;
             gap: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
         
         .deck-card:hover {
-            background: rgba(50,50,80,0.8);
+            background: linear-gradient(135deg, rgba(35,40,70,0.95) 0%, rgba(45,55,90,0.95) 100%);
             border-color: rgba(0,217,255,0.5);
             transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.4);
         }
         
         .deck-card .emoji {
@@ -130,22 +136,23 @@
         }
         
         .topic {
-            background: rgba(40,40,60,0.4);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(30,35,55,0.8);
+            border: 1px solid rgba(100,120,180,0.2);
             border-radius: 8px;
             padding: 12px 16px;
             text-align: center;
             font-size: 0.9em;
-            color: #aaa;
+            color: #bbb;
         }
         
         .author {
-            background: rgba(40,40,60,0.5);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: linear-gradient(135deg, rgba(25,30,50,0.9) 0%, rgba(30,40,60,0.85) 100%);
+            border: 1px solid rgba(100,120,180,0.25);
             border-radius: 16px;
             padding: 32px;
             text-align: center;
             margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
         }
         
         .author h2 {
