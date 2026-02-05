@@ -22,8 +22,8 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #0a0a12;
             background-image: 
-                radial-gradient(ellipse at top, rgba(30,40,80,0.4) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom right, rgba(0,80,80,0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at top left, rgba(30,40,80,0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(0,80,80,0.25) 0%, transparent 50%),
                 linear-gradient(180deg, #0a0a1a 0%, #12121f 50%, #0d1520 100%);
             color: #eee;
             min-height: 100vh;
@@ -35,27 +35,9 @@
             margin: 0 auto;
             padding: 60px 48px;
             position: relative;
-        }
-        
-        .container::before,
-        .container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: rgba(0, 200, 255, 0.4);
-            box-shadow: 
-                0 0 20px 8px rgba(0, 200, 255, 0.15),
-                0 0 40px 15px rgba(0, 180, 220, 0.08);
-        }
-        
-        .container::before {
-            left: 0;
-        }
-        
-        .container::after {
-            right: 0;
+            background-image: 
+                radial-gradient(ellipse at top left, rgba(30,40,80,0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(0,80,80,0.25) 0%, transparent 50%);
         }
         
         .hero {
