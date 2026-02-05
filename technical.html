@@ -392,7 +392,7 @@ tools = [{
     "type": "function",
     "function": {
         "name": "search_products",
-        "description": "Search HEB product catalog",
+        "description": "Search GroceryCo product catalog",
         "parameters": {
             "type": "object",
             "properties": {
@@ -793,18 +793,18 @@ order_summary</code></pre>
                     <pre><code class="python">from mcp.server import Server
 from mcp.types import Tool, TextContent
 
-server = Server("heb-shopping")
+server = Server("grocery-shopping")
 
 @server.tool()
 async def search_products(query: str, category: str = None):
-    """Search HEB product catalog."""
-    results = await heb_api.search(query, category=category)
+    """Search GroceryCo product catalog."""
+    results = await grocery_api.search(query, category=category)
     return [TextContent(type="text", text=json.dumps(results))]
 
 @server.tool()
 async def add_to_cart(product_id: str, quantity: int = 1):
     """Add a product to the shopping cart."""
-    result = await heb_api.cart.add(product_id, quantity)
+    result = await grocery_api.cart.add(product_id, quantity)
     return [TextContent(type="text", 
                         text=f"Added {quantity}x. Total: ${result.total}")]
 
@@ -852,7 +852,7 @@ if __name__ == "__main__":
   "id": 1,
   "result": {
     "content": [
-      {"type": "text", "text": "[{\"name\": \"HEB Organic Milk\"...}]"}
+      {"type": "text", "text": "[{\"name\": \"GroceryCo Organic Milk\"...}]"}
     ]
   }
 }</code></pre>
@@ -949,18 +949,18 @@ if __name__ == "__main__":
                     <pre><code class="python">from google.adk import Agent, Tool
 
 @Tool
-def search_heb_products(query: str, max_results: int = 10) -> dict:
-    """Search HEB product catalog."""
-    return heb_api.search(query, limit=max_results)
+def search_grocery_products(query: str, max_results: int = 10) -> dict:
+    """Search GroceryCo product catalog."""
+    return grocery_api.search(query, limit=max_results)
 
 shopping_agent = Agent(
-    name="heb_shopping_assistant",
+    name="grocery_shopping_assistant",
     model="gemini-2.0-flash",
-    system_instruction="""You are an HEB shopping assistant. 
+    system_instruction="""You are a GroceryCo shopping assistant. 
     Help customers find products, build shopping lists, and
     provide meal planning suggestions.""",
     tools=[
-        search_heb_products,
+        search_grocery_products,
         add_to_cart,
         get_cart_total,
     ],
@@ -1002,7 +1002,7 @@ POST /agent/product-search
     "context": {
         "dietary_restrictions": ["lactose-free"],
         "budget_preference": "value",
-        "brand_preferences": ["HEB", "Horizon"]
+        "brand_preferences": ["GroceryCo", "Horizon"]
     },
     "response_format": {
         "include_alternatives": true,
@@ -1026,7 +1026,7 @@ POST /agent/product-search
 ├────────────┤  ├────────────┤  ├────────────┤
 │ organic    │  │ size: 4    │  │ orders:156 │
 │ low_sodium │  │ has_kids   │  │ avg: $127  │
-│ HEB_brand  │  │ 2_dogs     │  │ freq:weekly│
+│ GroceryCo_brand  │  │ 2_dogs     │  │ freq:weekly│
 └────────────┘  └────────────┘  └────────────┘</code></pre>
                     <p class="text-muted">Graph enables: "Get what we need for the kids' lunches"</p>
                 </section>
@@ -1034,7 +1034,7 @@ POST /agent/product-search
                 <section>
                     <h2>Agent-to-Agent Commerce</h2>
                     <pre><code>┌─────────────────┐                ┌─────────────────┐
-│  Customer's     │                │  HEB's          │
+│  Customer's     │                │  GroceryCo's          │
 │  Personal Agent │                │  Shopping Agent │
 └────────┬────────┘                └────────┬────────┘
          │                                  │
