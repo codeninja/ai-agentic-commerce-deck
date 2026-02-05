@@ -41,28 +41,27 @@
         .container::after {
             content: '';
             position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 120px;
+            top: -100px;
+            bottom: -100px;
+            width: 300px;
             pointer-events: none;
+            filter: blur(40px);
         }
         
         .container::before {
-            left: 0;
-            background: linear-gradient(90deg, 
-                rgba(0, 217, 255, 0.25) 0%,
-                rgba(0, 180, 220, 0.12) 20%,
-                rgba(0, 150, 180, 0.04) 50%,
-                transparent 100%);
+            left: -150px;
+            background: radial-gradient(ellipse at right center,
+                rgba(0, 200, 255, 0.15) 0%,
+                rgba(0, 180, 220, 0.08) 30%,
+                transparent 70%);
         }
         
         .container::after {
-            right: 0;
-            background: linear-gradient(270deg, 
-                rgba(0, 217, 255, 0.25) 0%,
-                rgba(0, 180, 220, 0.12) 20%,
-                rgba(0, 150, 180, 0.04) 50%,
-                transparent 100%);
+            right: -150px;
+            background: radial-gradient(ellipse at left center,
+                rgba(0, 200, 255, 0.15) 0%,
+                rgba(0, 180, 220, 0.08) 30%,
+                transparent 70%);
         }
         
         .hero {
