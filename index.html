@@ -33,7 +33,7 @@
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 60px 24px;
+            padding: 60px 48px;
             position: relative;
         }
         
@@ -43,23 +43,25 @@
             position: absolute;
             top: 0;
             bottom: 0;
-            width: 80px;
+            width: 120px;
             pointer-events: none;
         }
         
         .container::before {
-            left: -40px;
+            left: 0;
             background: linear-gradient(90deg, 
-                transparent 0%,
-                rgba(0, 217, 255, 0.08) 50%,
+                rgba(0, 217, 255, 0.25) 0%,
+                rgba(0, 180, 220, 0.12) 20%,
+                rgba(0, 150, 180, 0.04) 50%,
                 transparent 100%);
         }
         
         .container::after {
-            right: -40px;
-            background: linear-gradient(90deg, 
-                transparent 0%,
-                rgba(0, 217, 255, 0.08) 50%,
+            right: 0;
+            background: linear-gradient(270deg, 
+                rgba(0, 217, 255, 0.25) 0%,
+                rgba(0, 180, 220, 0.12) 20%,
+                rgba(0, 150, 180, 0.04) 50%,
                 transparent 100%);
         }
         
